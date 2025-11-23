@@ -1,0 +1,221 @@
+<!DOCTYPE HTML>
+<!--
+	ZeroFour by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>contato</title>
+		<link rel ="icon" type="image/png" href="images/BD.png" />
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header Wrapper -->
+				<div id="header-wrapper">
+					<div class="container">
+
+						<!-- Header -->
+							<header id="header">
+								<div class="inner">
+
+										<!-- Logo -->
+										<h1><a href="index.html" id="logo">BD Admin</a></h1>
+
+									<!-- Nav -->
+											<nav id="nav">
+											<ul>
+												<li><a href="index.html">Home</a></li>
+												<li><a href="sobre.html">sobre</a></li>
+												<li><a href="formacao.html">formação</a></li>
+												<li>
+													<a href="#">bibliografia</a>
+													<ul>
+														<li><a href="bibliografia.html">Bibliografia</a></li>
+														<li><a href="desenvolvedor.html">Desenvolvedor</a></li>
+													</ul>
+												</li>
+												<li><a href="certificacao.html">Certificação</a></li>
+												<li class="current_page_item"><a href="atuacao.html">Atuação</a></li>
+												<li><a href="contato.html">contact</a></li>
+												</ul>
+											</nav>
+
+
+								</div>
+							</header>
+
+					</div>
+				</div>
+
+			<!-- Main Wrapper -->
+				<div id="main-wrapper">
+					<div class="wrapper style2">
+						<div class="inner">
+							<div class="container">
+						<div id="content">
+
+							<article class="box important-content">
+								<header class="major">
+									<h2>Contato</h2>
+								</header>
+
+								<div id="contact-notice" class="form-notice" role="alert" aria-live="polite" style="display:none"></div>
+
+								<form id="contact-form" novalidate>
+									<table class="form-table">
+										<tr>
+											<td><label for="nome">Nome *</label></td>
+											<td><input type="text" id="nome" name="nome" required></td>
+										</tr>
+										<tr>
+											<td><label for="email">Email *</label></td>
+											<td><input type="email" id="email" name="email" required></td>
+										</tr>
+										<tr>
+											<td><label for="telefone">Telefone *</label></td>
+											<td><input type="tel" id="telefone" name="telefone" required pattern="^[0-9+()\-\s]{7,20}$" placeholder="+55 11 91234-5678"></td>
+										</tr>
+										<tr>
+											<td><label for="observacoes">Observações</label></td>
+											<td><textarea id="observacoes" name="observacoes" rows="4" placeholder="Opcional"></textarea></td>
+										</tr>
+										<tr>
+											<td></td>
+											<td><button type="submit" class="button">Enviar</button></td>
+										</tr>
+									</table>
+								</form>
+							</article>
+
+						</div>
+
+						<!-- Page-specific validation script -->
+						<script>
+						(function(){
+							var form = document.getElementById('contact-form');
+							var notice = document.getElementById('contact-notice');
+							function showNotice(msg, type){ notice.textContent = msg; notice.style.display = 'block'; notice.className = 'form-notice ' + (type||'error'); }
+							function clearNotice(){ notice.textContent = ''; notice.style.display = 'none'; notice.className = 'form-notice'; }
+							if(!form) return;
+							// Prevent numeric characters in name while typing/pasting
+							var nomeInput = form.nome;
+							if(nomeInput){
+								nomeInput.addEventListener('keydown', function(ev){
+									// block direct numeric key entry
+									if(/^[0-9]$/.test(ev.key)) ev.preventDefault();
+								});
+								nomeInput.addEventListener('input', function(){
+									// sanitize pasted or programmatic input by removing digits
+									var clean = this.value.replace(/[0-9]/g, '');
+									if(this.value !== clean) this.value = clean;
+								});
+							}
+
+							form.addEventListener('submit', function(e){
+								e.preventDefault();
+								clearNotice();
+								var nome = form.nome.value.trim();
+								var email = form.email.value.trim();
+								var tel = form.telefone.value.trim();
+								if(!nome){ showNotice('Por favor preencha o campo Nome.', 'error'); form.nome.focus(); return; }
+								// Ensure name contains no digits
+								if(/[0-9]/.test(nome)){ showNotice('O campo Nome não pode conter números.', 'error'); form.nome.focus(); return; }
+								if(!email){ showNotice('Por favor preencha o campo Email.', 'error'); form.email.focus(); return; }
+								var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+								if(!emailRe.test(email)){ showNotice('O email informado é inválido.', 'error'); form.email.focus(); return; }
+								if(!tel){ showNotice('Por favor preencha o campo Telefone.', 'error'); form.telefone.focus(); return; }
+								var telRe = /^[0-9+()\-\s]{7,20}$/;
+								if(!telRe.test(tel)){ showNotice('O telefone informado é inválido.', 'error'); form.telefone.focus(); return; }
+								// All validations passed — show success (replace with actual submit/send logic as needed)
+								showNotice('Formulário válido — pronto para envio.', 'success');
+								// show confirmation modal
+								if(window.showSubmissionModal) window.showSubmissionModal();
+								// Optionally clear the form (uncomment if desired)
+								// form.reset();
+							});
+						})();
+						</script>
+
+						<!-- Submission confirmation modal -->
+						<div id="submission-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="submission-modal-title" style="display:none;">
+							<div class="modal-content">
+								<button class="modal-close" aria-label="Fechar">&times;</button>
+								<h3 id="submission-modal-title">Formulário enviado</h3>
+								<p>Obrigado — seu formulário foi enviado com sucesso.</p>
+								<div class="modal-actions">
+									<button class="button modal-ok">OK</button>
+								</div>
+							</div>
+						</div>
+
+						<script>
+						(function(){
+							var modal = document.getElementById('submission-modal');
+							if(!modal) return;
+							var closeBtn = modal.querySelector('.modal-close');
+							var okBtn = modal.querySelector('.modal-ok');
+							function showSubmissionModal(){ modal.style.display = 'block'; document.body.style.overflow = 'hidden'; okBtn.focus(); }
+							function hideSubmissionModal(){ modal.style.display = 'none'; document.body.style.overflow = ''; }
+							closeBtn.addEventListener('click', function(){
+								// clear notices when closing
+								var noticeEl = document.getElementById('contact-notice');
+								if(noticeEl){ noticeEl.style.display='none'; noticeEl.textContent=''; noticeEl.className='form-notice'; }
+								hideSubmissionModal();
+							});
+							okBtn.addEventListener('click', function(){
+								// reset form and clear notices when OK is clicked
+								var formEl = document.getElementById('contact-form');
+								var noticeEl = document.getElementById('contact-notice');
+								if(formEl) formEl.reset();
+								if(noticeEl){ noticeEl.style.display='none'; noticeEl.textContent=''; noticeEl.className='form-notice'; }
+								hideSubmissionModal();
+							});
+							modal.addEventListener('click', function(e){ if(e.target === modal) hideSubmissionModal(); });
+							// expose to existing validation script via window so we can call it
+							window.showSubmissionModal = showSubmissionModal;
+						})();
+						</script>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			<!-- Footer Wrapper -->
+				<div id="footer-wrapper">
+					<footer id="footer" class="container">
+						<div class="row">
+							<div class="col-3 col-6-medium col-12-small">
+							</div>
+							<div class="col-3 col-6-medium col-12-small">
+							</div>
+							<div class="col-12">
+								<div id="copyright">
+									<ul class="menu">
+										<li> Davi Ferreira 2025 - &copy; Todos os direitos reservados
+
+										</li><li>Trabalho Acadêmico sem fins lucrativos</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</footer>
+				</div>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
